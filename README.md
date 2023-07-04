@@ -1,2 +1,5 @@
 # battleship
-The classic game 'Battleship', built with TDD.
+
+The classic game 'Battleship'.
+
+This project I am practicing TDD, using Jest.
