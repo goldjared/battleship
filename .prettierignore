@@ -1,0 +1,4 @@
+/dist/index.html
+/dist/main.js
+.gitignore
+node_modules
