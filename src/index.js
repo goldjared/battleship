@@ -1,7 +1,7 @@
-console.log('this is the test');
+console.log("this is the test");
 
 function tester(x) {
-  return false;
+  return "fail";
 }
 
-export { tester }
+export { tester };
