@@ -1,5 +1,9 @@
-import { tester } from "./index.js";
+import { ship } from "./index.js";
 
-test("see if this fails", () => {
-  expect(tester()).toBe("fail");
+test("should return object with ship length, hits, and whether sunk/or not", () => {
+  expect(ship()).toEqual({
+    length: 0,
+    hits: 0,
+    sunken: false
+  });
 });
