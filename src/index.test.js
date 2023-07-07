@@ -8,10 +8,13 @@ test("should return object with ship length, hits, and whether sunk/or not", () 
     sunken: false
   });
 });
- test('hit will hit for value of 1', () => {
-  expect(testShip.hit()).toBe(1);
+ test('after hitting testShip twice, testShip.hit should be 2', () => {
+  testShip.hit()
+  testShip.hit()
+  expect(testShip.getShip().hits).toBe(2);
 })
 
-test('isSunk is false after no ship hit on length 2 ship', () => {
-  expect(testShip.isSunk()).toBe(false)
+test('isSunk is true after 2 ship hit on length 2 ship', () => {
+  testShip.isSunk();
+  expect(testShip.getShip().sunken).toBe(true)
 })
