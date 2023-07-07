@@ -1,4 +1,4 @@
-import { ship } from "./index.js";
+import { ship, gameBoard } from "./index.js";
 const testShip = ship(2);
 
 test("should return object with ship length, hits, and whether sunk/or not", () => {
@@ -17,4 +17,13 @@ test("should return object with ship length, hits, and whether sunk/or not", () 
 test('isSunk is true after 2 ship hit on length 2 ship', () => {
   testShip.isSunk();
   expect(testShip.getShip().sunken).toBe(true)
+})
+let testBoard = gameBoard()
+test('gameBoard func create 100 obj', () => {
+  expect(testBoard.length).toBe(100);
+})
+test('[0] in gameBoard should match template obj', () => {
+  expect(testBoard[0]).toEqual({data: [0,0], ship: false});
+
+  expect(testBoard[4]).toEqual({data: [0,4], ship: false});
 })
