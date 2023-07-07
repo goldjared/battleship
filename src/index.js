@@ -1,16 +1,22 @@
-console.log("this is the test");
+function ship(x) {
+  const length = x;
+  let sunken = false;
+  let hits = 0;
 
-function ship() {
-  let length;
+  const getShip = () => ({
+      length,
+      sunken,
+      hits
+    })
 
-  let hits;
-  let sunken;
-
-  return {
-    length: 0,
-    hits: 0,
-    sunken: false,
+  const hit = () => {
+    hits += 1;
   }
+
+  const isSunk = () => {
+    if(hits >= length) sunken = true;
+  }
+  return { hit, isSunk, getShip }
 }
 
 export { ship };
