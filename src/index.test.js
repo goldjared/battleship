@@ -5,31 +5,31 @@ test("should return object with ship length, hits, and whether sunk/or not", () 
   expect(testShip.getShip()).toEqual({
     length: 2,
     hits: 0,
-    sunken: false
+    sunken: false,
   });
 });
- test('after hitting testShip twice, testShip.hit should be 2', () => {
-  testShip.hit()
-  testShip.hit()
+test("after hitting testShip twice, testShip.hit should be 2", () => {
+  testShip.hit();
+  testShip.hit();
   expect(testShip.getShip().hits).toBe(2);
-})
+});
 
-test('isSunk is true after 2 ship hit on length 2 ship', () => {
+test("isSunk is true after 2 ship hit on length 2 ship", () => {
   testShip.isSunk();
-  expect(testShip.getShip().sunken).toBe(true)
-})
+  expect(testShip.getShip().sunken).toBe(true);
+});
 
 let testBoard = gameBoard();
-test('gameBoard func create 100 obj', () => {
+test("gameBoard func create 100 obj", () => {
   expect(testBoard.getShip().length).toBe(100);
-})
+});
 
-test('[0] in gameBoard should match template obj', () => {
-  expect(testBoard.getShip()[0]).toEqual({data: [0,0], ship: false});
+test("[0] in gameBoard should match template obj", () => {
+  expect(testBoard.getShip()[0]).toEqual({ data: [0, 0], ship: false });
 
-  expect(testBoard.getShip()[4]).toEqual({data: [0,4], ship: false});
-})
+  expect(testBoard.getShip()[4]).toEqual({ data: [0, 4], ship: false });
+});
 
-test('placeShip will place carrier size 5 at the coord [0,0] horizontally', () => {
+test("placeShip will place carrier size 5 at the coord [0,0] horizontally", () => {
   expect(testBoard[0].ship).toBe(true);
-})
+});
