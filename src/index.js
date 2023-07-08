@@ -6,7 +6,7 @@ function gameBoard() {
     }
   }
 
-  const getShip = () => board;
+  const getBoard = () => board;
 
   const placeShip = (coord, direction, size) => {
     const target = board.find(
@@ -15,7 +15,7 @@ function gameBoard() {
     );
   };
 
-  return { placeShip, getShip };
+  return { placeShip, getBoard };
 }
 
 function ship(x) {
