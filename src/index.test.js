@@ -21,13 +21,13 @@ test("isSunk is true after 2 ship hit on length 2 ship", () => {
 
 let testBoard = gameBoard();
 test("gameBoard func create 100 obj", () => {
-  expect(testBoard.getShip().length).toBe(100);
+  expect(testBoard.getBoard().length).toBe(100);
 });
 
 test("[0] in gameBoard should match template obj", () => {
-  expect(testBoard.getShip()[0]).toEqual({ data: [0, 0], ship: false });
+  expect(testBoard.getBoard()[0]).toEqual({ data: [0, 0], ship: false });
 
-  expect(testBoard.getShip()[4]).toEqual({ data: [0, 4], ship: false });
+  expect(testBoard.getBoard()[4]).toEqual({ data: [0, 4], ship: false });
 });
 
 test("placeShip will place carrier size 5 at the coord [0,0] horizontally", () => {
