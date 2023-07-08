@@ -1,19 +1,22 @@
 function gameBoard() {
   const board = [];
-  const build = () => {
   for(let i = 0; i < 10; i++) {
     for(let j = 0; j < 10; j++) {
       board.push({data: [i, j],
       ship: false})
     }
   }
-  return board;
+
+  const getShip = () => board;
+
+  const placeShip = (coord, direction, size) => {
+
+  const target = board.find(position => position.data[0] === coord[0] && position.data[1] === coord[1]);
+  
+
   }
-return { build }
-}
 
-function placeShip(board) {
-
+return { placeShip, getShip }
 }
 
 function ship(x) {
