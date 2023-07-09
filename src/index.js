@@ -28,16 +28,20 @@ function gameBoard() {
   }
 
   const getBoard = () => board;
+  const searchBoard = coord => {
+    const target = board.find(
+      (position) =>
+        position.data[0] === coord[0] && position.data[1] === coord[1]
+    );
+    return target;
+  }
 
   function placeShip (...coords) {
     const queue = [];
     const originalCoordLength = coords.length;
     while(coords.length > 0) {
     const currentCoord = coords.shift();
-    const coordObj = board.find(
-      (position) =>
-        position.data[0] === currentCoord[0] && position.data[1] === currentCoord[1]
-    );
+    const coordObj = searchBoard(currentCoord)
     if(coordObj.ship === false) {
       queue.push(coordObj)
     } else {
@@ -54,7 +58,7 @@ function gameBoard() {
   }
 }
 
-  return { placeShip, getBoard };
+  return { placeShip, getBoard, searchBoard };
 }
 
 
