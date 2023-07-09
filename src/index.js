@@ -58,7 +58,16 @@ function gameBoard() {
   }
 }
 
-  return { placeShip, getBoard, searchBoard };
+function receiveAttack(target) {
+  const targetPosition = searchBoard(target);
+  if(targetPosition.ship !== false) {
+    return true;
+  } 
+  return false;
+  } 
+
+
+  return { placeShip, getBoard, searchBoard, receiveAttack };
 }
 
 
