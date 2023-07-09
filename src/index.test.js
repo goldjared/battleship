@@ -43,4 +43,10 @@ test('check if testboard[0] is working properply and still shows it has a ship',
   expect(testBoard.getBoard()[0].ship.getShip).not.toBe(false)
 })
 
+test('gameBoard method receiveAttack check if attack hits a ship', () => {
+  expect(testBoard.receiveAttack([0,0])).toBe(true);
+})
 
+test('gameBoard method receiveAttack check if attack NOT hit a ship', () => {
+  expect(testBoard.receiveAttack([2,4])).toBe(false);
+})
