@@ -8,12 +8,30 @@ function gameBoard() {
 
   const getBoard = () => board;
 
-  const placeShip = (coord, direction, size) => {
-    const target = board.find(
+  function placeShip (...coords) {
+    const queue = [];
+    const originalCoordLength = coords.length;
+    while(coords.length > 0) {
+    const currentCoord = coords.shift();
+    const coordObj = board.find(
       (position) =>
-        position.data[0] === coord[0] && position.data[1] === coord[1]
+        position.data[0] === currentCoord[0] && position.data[1] === currentCoord[1]
     );
+    if(coordObj.ship === false) {
+      queue.push(coordObj)
+    } else {
+      return;
+    }
+
   };
+  if(queue.length === originalCoordLength) {
+    const newShipObj = ship(originalCoordLength)
+    while(queue.length > 0) {
+      const linkingToShip = queue.shift();
+      linkingToShip.ship = newShipObj;
+    }
+  }
+}
 
   return { placeShip, getBoard };
 }
