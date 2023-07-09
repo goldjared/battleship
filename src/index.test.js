@@ -30,6 +30,17 @@ test("[0] in gameBoard should match template obj", () => {
   expect(testBoard.getBoard()[4]).toEqual({ data: [0, 4], ship: false });
 });
 
-test("placeShip will place carrier size 5 at the coord [0,0] horizontally", () => {
-  expect(testBoard[0].ship).toBe(true);
-});
+test("placeShip will connect the ship objs to their coords", () => {
+  //placeship at coords
+  //check 
+  testBoard.placeShip([0,0], [1,0], [2,0], [3,0], [4,0])
+  expect(testBoard.searchBoard([0,0]).ship).not.toBe(false)
+  expect(testBoard.searchBoard([1,0]).ship).not.toBe(false)
+  expect(testBoard.searchBoard([5,0]).ship).toBe(false)
+})
+
+test('check if testboard[0] is working properply and still shows it has a ship', () => {
+  expect(testBoard.getBoard()[0].ship.getShip).not.toBe(false)
+})
+
+
