@@ -28,48 +28,44 @@ function gameBoard() {
   }
 
   const getBoard = () => board;
-  const searchBoard = coord => {
+  const searchBoard = (coord) => {
     const target = board.find(
       (position) =>
         position.data[0] === coord[0] && position.data[1] === coord[1]
     );
     return target;
-  }
+  };
 
-  function placeShip (...coords) {
+  function placeShip(...coords) {
     const queue = [];
     const originalCoordLength = coords.length;
-    while(coords.length > 0) {
-    const currentCoord = coords.shift();
-    const coordObj = searchBoard(currentCoord)
-    if(coordObj.ship === false) {
-      queue.push(coordObj)
-    } else {
-      return;
+    while (coords.length > 0) {
+      const currentCoord = coords.shift();
+      const coordObj = searchBoard(currentCoord);
+      if (coordObj.ship === false) {
+        queue.push(coordObj);
+      } else {
+        return;
+      }
     }
-
-  };
-  if(queue.length === originalCoordLength) {
-    const newShipObj = ship(originalCoordLength)
-    while(queue.length > 0) {
-      const linkingToShip = queue.shift();
-      linkingToShip.ship = newShipObj;
+    if (queue.length === originalCoordLength) {
+      const newShipObj = ship(originalCoordLength);
+      while (queue.length > 0) {
+        const linkingToShip = queue.shift();
+        linkingToShip.ship = newShipObj;
+      }
     }
   }
-}
 
-function receiveAttack(target) {
-  const targetPosition = searchBoard(target);
-  if(targetPosition.ship !== false) {
-    return true;
-  } 
-  return false;
-  } 
-
+  function receiveAttack(target) {
+    const targetPosition = searchBoard(target);
+    if (targetPosition.ship !== false) {
+      return true;
+    }
+    return false;
+  }
 
   return { placeShip, getBoard, searchBoard, receiveAttack };
 }
-
-
 
 export { ship, gameBoard };

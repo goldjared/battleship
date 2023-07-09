@@ -32,21 +32,21 @@ test("[0] in gameBoard should match template obj", () => {
 
 test("placeShip will connect the ship objs to their coords", () => {
   //placeship at coords
-  //check 
-  testBoard.placeShip([0,0], [1,0], [2,0], [3,0], [4,0])
-  expect(testBoard.searchBoard([0,0]).ship).not.toBe(false)
-  expect(testBoard.searchBoard([1,0]).ship).not.toBe(false)
-  expect(testBoard.searchBoard([5,0]).ship).toBe(false)
-})
+  //check
+  testBoard.placeShip([0, 0], [1, 0], [2, 0], [3, 0], [4, 0]);
+  expect(testBoard.searchBoard([0, 0]).ship).not.toBe(false);
+  expect(testBoard.searchBoard([1, 0]).ship).not.toBe(false);
+  expect(testBoard.searchBoard([5, 0]).ship).toBe(false);
+});
 
-test('check if testboard[0] is working properply and still shows it has a ship', () => {
-  expect(testBoard.getBoard()[0].ship.getShip).not.toBe(false)
-})
+test("check if testboard[0] is working properply and still shows it has a ship", () => {
+  expect(testBoard.getBoard()[0].ship.getShip).not.toBe(false);
+});
 
-test('gameBoard method receiveAttack check if attack hits a ship', () => {
-  expect(testBoard.receiveAttack([0,0])).toBe(true);
-})
+test("gameBoard method receiveAttack check if attack hits a ship", () => {
+  expect(testBoard.receiveAttack([0, 0])).toBe(true);
+});
 
-test('gameBoard method receiveAttack check if attack NOT hit a ship', () => {
-  expect(testBoard.receiveAttack([2,4])).toBe(false);
-})
+test("gameBoard method receiveAttack check if attack NOT hit a ship", () => {
+  expect(testBoard.receiveAttack([2, 4])).toBe(false);
+});
