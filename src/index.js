@@ -18,14 +18,12 @@ function ship(x) {
     isSunk()
   };
 
-  const isSunk = () => {
-    if (hits >= length) sunken = true;
-  };
   return { hit, isSunk, getShip };
 }
 
 function gameBoard() {
   const board = [];
+  const boardShips = [];
   const missedAttackCoords = [];
   for (let i = 0; i < 10; i++) {
     for (let j = 0; j < 10; j++) {
@@ -56,11 +54,16 @@ function gameBoard() {
     }
     if (queue.length === originalCoordLength) {
       const newShipObj = ship(originalCoordLength);
+      boardShips.push(newShipObj)
       while (queue.length > 0) {
         const linkingToShip = queue.shift();
         linkingToShip.ship = newShipObj;
       }
     }
+  }
+
+  function isBoardShipsSunk() {
+    return boardShips.some(boardShip => boardShip.getShip().sunken !== false)
   }
 
   function receiveAttack(target) {
@@ -75,7 +78,7 @@ function gameBoard() {
 
   }
 
-  return { placeShip, getBoard, searchBoard, receiveAttack, getMissedAttacks };
+  return { placeShip, getBoard, searchBoard, receiveAttack, getMissedAttacks, isBoardShipsSunk };
 }
 
 export { ship, gameBoard };
