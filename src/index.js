@@ -21,12 +21,13 @@ function ship(x) {
 
 function gameBoard() {
   const board = [];
+  const missedAttackCoords = [];
   for (let i = 0; i < 10; i++) {
     for (let j = 0; j < 10; j++) {
       board.push({ data: [i, j], ship: false });
     }
   }
-
+  const getMissedAttacks = () => missedAttackCoords;
   const getBoard = () => board;
   const searchBoard = (coord) => {
     const target = board.find(
@@ -62,11 +63,14 @@ function gameBoard() {
     if (targetPosition.ship !== false) {
       targetPosition.ship.hit();
       return true;
-    }
-    return false;
+    } 
+    missedAttackCoords.push(target)
+    return false;     
+    
+
   }
 
-  return { placeShip, getBoard, searchBoard, receiveAttack };
+  return { placeShip, getBoard, searchBoard, receiveAttack, getMissedAttacks };
 }
 
 export { ship, gameBoard };
