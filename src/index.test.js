@@ -55,3 +55,9 @@ test('receiveattack if hits a ship, should send a hit to said ship.', () => {
   testBoard.receiveAttack([0,0])
   expect(testBoard.searchBoard([0,0]).ship.getShip().hits).toBe(2);
 })
+
+test('receiveattack push a missed hit coord to array', () => {
+  testBoard.receiveAttack([3,4])
+  expect(testBoard.getMissedAttacks().length).toBe(2);
+})
+
