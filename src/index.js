@@ -60,6 +60,7 @@ function gameBoard() {
   function receiveAttack(target) {
     const targetPosition = searchBoard(target);
     if (targetPosition.ship !== false) {
+      targetPosition.ship.hit();
       return true;
     }
     return false;
