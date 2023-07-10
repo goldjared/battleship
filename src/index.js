@@ -9,8 +9,13 @@ function ship(x) {
     hits,
   });
 
+  const isSunk = () => {
+    if (hits >= length) sunken = true;
+  };
+
   const hit = () => {
     hits += 1;
+    isSunk()
   };
 
   const isSunk = () => {
