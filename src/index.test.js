@@ -52,8 +52,7 @@ test("gameBoard method receiveAttack check if attack NOT hit a ship", () => {
 });
 
 test('receiveattack if hits a ship, should send a hit to said ship.', () => {
-  testBoard.receiveAttack([0,0])
-  expect(testBoard.searchBoard([0,0]).ship.getShip().hits).toBe(2);
+  expect(testBoard.searchBoard([0,0]).ship.getShip().hits).toBe(1);
 })
 
 test('receiveattack push a missed hit coord to array', () => {

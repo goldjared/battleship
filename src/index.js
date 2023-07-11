@@ -63,7 +63,7 @@ function gameBoard() {
   }
 
   function isBoardShipsSunk() {
-    return boardShips.some(boardShip => boardShip.getShip().sunken !== false)
+    return boardShips.every(boardShip => boardShip.getShip().sunken === true)
   }
 
   function receiveAttack(target) {
