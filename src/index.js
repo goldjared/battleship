@@ -89,4 +89,23 @@ turn: null,
 }
 }
 
-export { ship, gameBoard, player };
+function computer() {
+  const computerObj = {
+    name: 'Computer',
+    score: 0,
+    turn: null,
+  }
+
+  function generateMove() {
+    const moveArray = []
+    while(moveArray.length < 2) {
+      const randomNumber = Math.floor(Math.random() * 10);
+      moveArray.push(randomNumber);
+    }
+    return moveArray;
+  }
+
+  const getComputer = () => computerObj
+  return { getComputer, generateMove }
+}
+export { ship, gameBoard, player, computer };
