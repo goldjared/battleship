@@ -81,4 +81,12 @@ function gameBoard() {
   return { placeShip, getBoard, searchBoard, receiveAttack, getMissedAttacks, isBoardShipsSunk };
 }
 
-export { ship, gameBoard };
+function player() {
+return {
+name: 'Player',
+score: 0,
+turn: null,
+}
+}
+
+export { ship, gameBoard, player };

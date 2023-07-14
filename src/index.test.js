@@ -71,3 +71,8 @@ test('gameboard should report all ships are sunk', () => {
   testBoard.receiveAttack([4,0])
   expect(testBoard.isBoardShipsSunk()).toBe(true)
 })
+
+test('player func creates player1 ', () => {
+  const testPlayer1 = player()
+  expect(testPlayer1).toEqual({name: 'Player', score: 0, turn: null})
+})
