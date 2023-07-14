@@ -76,3 +76,11 @@ test('player func creates player1 ', () => {
   const testPlayer1 = player()
   expect(testPlayer1).toEqual({name: 'Player', score: 0, turn: null})
 })
+
+test('cpu func creates cpu', () => {
+  expect(computer().getComputer()).toEqual({name: 'Computer', score: 0, turn: null})
+})
+
+test('cpu can make a random move', () => {
+  expect(computer().generateMove()).toHaveLength(2)
+})
