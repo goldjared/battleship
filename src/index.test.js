@@ -1,4 +1,4 @@
-import { ship, gameBoard } from "./index.js";
+import { ship, gameBoard, player, computer } from "./index.js";
 const testShip = ship(2);
 
 test("should return object with ship length, hits, and whether sunk/or not", () => {
