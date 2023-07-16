@@ -1,3 +1,4 @@
+import "./style.css"
 import { gameBoardDisplay } from "./dom";
 
 function ship(x) {
