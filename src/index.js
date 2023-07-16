@@ -1,3 +1,5 @@
+import { gameBoardDisplay } from "./dom";
+
 function ship(x) {
   const length = x;
   let sunken = false;
@@ -108,4 +110,26 @@ function computer() {
   const getComputer = () => computerObj
   return { getComputer, generateMove }
 }
-export { ship, gameBoard, player, computer };
+
+function game() {
+  const player1 = player();
+  const player1Board = gameBoard();
+  player1Board.placeShip([0,0], [1,0], [2,0], [3,0], [4,0])
+  player1Board.placeShip([0,8], [0,9])
+  player1Board.placeShip([4,6], [4,7], [4,8], [4,9])
+  player1Board.placeShip([7,3])
+  player1Board.placeShip([7,9], [8,9], [9,9])
+  gameBoardDisplay(player1Board)
+
+  const cpu1 = computer();
+  const cpu1Board = gameBoard();
+  cpu1Board.placeShip([0,0], [1,0], [2,0], [3,0], [4,0])
+  cpu1Board.placeShip([0,8], [0,9])
+  cpu1Board.placeShip([4,6], [4,7], [4,8], [4,9])
+  cpu1Board.placeShip([7,3])
+  cpu1Board.placeShip([7,9], [8,9], [9,9])
+
+}
+
+game();
+export { ship, gameBoard, player, computer, game };
