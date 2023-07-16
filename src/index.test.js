@@ -1,3 +1,6 @@
+/**
+ * @jest-environment jsdom
+ */
 import { ship, gameBoard, player, computer } from "./index.js";
 const testShip = ship(2);
 
@@ -84,3 +87,11 @@ test('cpu func creates cpu', () => {
 test('cpu can make a random move', () => {
   expect(computer().generateMove()).toHaveLength(2)
 })
+
+// test('game create player board', () => {
+//   expect(game()).toBe()
+// })
+
+// test('game create player board', () => {
+//   expect(testBoard.getBoard()).toBe()
+// })
