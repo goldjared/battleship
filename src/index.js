@@ -1,4 +1,4 @@
-import "./style.css"
+import "./style.css";
 import { gameBoardDisplay } from "./dom";
 
 function ship(x) {
@@ -18,7 +18,7 @@ function ship(x) {
 
   const hit = () => {
     hits += 1;
-    isSunk()
+    isSunk();
   };
 
   return { hit, isSunk, getShip };
@@ -57,7 +57,7 @@ function gameBoard() {
     }
     if (queue.length === originalCoordLength) {
       const newShipObj = ship(originalCoordLength);
-      boardShips.push(newShipObj)
+      boardShips.push(newShipObj);
       while (queue.length > 0) {
         const linkingToShip = queue.shift();
         linkingToShip.ship = newShipObj;
@@ -66,7 +66,7 @@ function gameBoard() {
   }
 
   function isBoardShipsSunk() {
-    return boardShips.every(boardShip => boardShip.getShip().sunken === true)
+    return boardShips.every((boardShip) => boardShip.getShip().sunken === true);
   }
 
   function receiveAttack(target) {
@@ -74,62 +74,66 @@ function gameBoard() {
     if (targetPosition.ship !== false) {
       targetPosition.ship.hit();
       return true;
-    } 
-    missedAttackCoords.push(target)
-    return false;     
-    
-
+    }
+    missedAttackCoords.push(target);
+    return false;
   }
 
-  return { placeShip, getBoard, searchBoard, receiveAttack, getMissedAttacks, isBoardShipsSunk };
+  return {
+    placeShip,
+    getBoard,
+    searchBoard,
+    receiveAttack,
+    getMissedAttacks,
+    isBoardShipsSunk,
+  };
 }
 
 function player() {
-return {
-name: 'Player',
-score: 0,
-turn: null,
-}
+  return {
+    name: "Player",
+    score: 0,
+    turn: null,
+  };
 }
 
 function computer() {
   const computerObj = {
-    name: 'Computer',
+    name: "Computer",
     score: 0,
     turn: null,
-  }
+  };
 
   function generateMove() {
-    const moveArray = []
-    while(moveArray.length < 2) {
+    const moveArray = [];
+    while (moveArray.length < 2) {
       const randomNumber = Math.floor(Math.random() * 10);
       moveArray.push(randomNumber);
     }
     return moveArray;
   }
 
-  const getComputer = () => computerObj
-  return { getComputer, generateMove }
+  const getComputer = () => computerObj;
+  return { getComputer, generateMove };
 }
 
 function game() {
   const player1 = player();
   const player1Board = gameBoard();
-  player1Board.placeShip([0,0], [1,0], [2,0], [3,0], [4,0])
-  player1Board.placeShip([0,8], [0,9])
-  player1Board.placeShip([4,6], [4,7], [4,8], [4,9])
-  player1Board.placeShip([7,3])
-  player1Board.placeShip([7,9], [8,9], [9,9])
-  gameBoardDisplay(player1Board)
+  player1Board.placeShip([0, 0], [1, 0], [2, 0], [3, 0], [4, 0]);
+  player1Board.placeShip([0, 8], [0, 9]);
+  player1Board.placeShip([4, 6], [4, 7], [4, 8], [4, 9]);
+  player1Board.placeShip([7, 3]);
+  player1Board.placeShip([7, 9], [8, 9], [9, 9]);
+  gameBoardDisplay(player1Board);
 
   const cpu1 = computer();
   const cpu1Board = gameBoard();
-  cpu1Board.placeShip([0,0], [1,0], [2,0], [3,0], [4,0])
-  cpu1Board.placeShip([0,8], [0,9])
-  cpu1Board.placeShip([4,6], [4,7], [4,8], [4,9])
-  cpu1Board.placeShip([7,3])
-  cpu1Board.placeShip([7,9], [8,9], [9,9])
-
+  cpu1Board.placeShip([0, 0], [1, 0], [2, 0], [3, 0], [4, 0]);
+  cpu1Board.placeShip([0, 8], [0, 9]);
+  cpu1Board.placeShip([4, 6], [4, 7], [4, 8], [4, 9]);
+  cpu1Board.placeShip([7, 3]);
+  cpu1Board.placeShip([7, 9], [8, 9], [9, 9]);
 }
 
 game();

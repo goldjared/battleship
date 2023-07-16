@@ -54,39 +54,43 @@ test("gameBoard method receiveAttack check if attack NOT hit a ship", () => {
   expect(testBoard.receiveAttack([2, 4])).toBe(false);
 });
 
-test('receiveattack if hits a ship, should send a hit to said ship.', () => {
-  expect(testBoard.searchBoard([0,0]).ship.getShip().hits).toBe(1);
-})
+test("receiveattack if hits a ship, should send a hit to said ship.", () => {
+  expect(testBoard.searchBoard([0, 0]).ship.getShip().hits).toBe(1);
+});
 
-test('receiveattack push a missed hit coord to array', () => {
-  testBoard.receiveAttack([3,4])
+test("receiveattack push a missed hit coord to array", () => {
+  testBoard.receiveAttack([3, 4]);
   expect(testBoard.getMissedAttacks().length).toBe(2);
-})
+});
 
-test('gameboard should report whether or not all its ship is sunk', () => {
-  expect(testBoard.isBoardShipsSunk()).toBe(false)
-})
+test("gameboard should report whether or not all its ship is sunk", () => {
+  expect(testBoard.isBoardShipsSunk()).toBe(false);
+});
 
-test('gameboard should report all ships are sunk', () => {
-  testBoard.receiveAttack([1,0])
-  testBoard.receiveAttack([2,0])
-  testBoard.receiveAttack([3,0])
-  testBoard.receiveAttack([4,0])
-  expect(testBoard.isBoardShipsSunk()).toBe(true)
-})
+test("gameboard should report all ships are sunk", () => {
+  testBoard.receiveAttack([1, 0]);
+  testBoard.receiveAttack([2, 0]);
+  testBoard.receiveAttack([3, 0]);
+  testBoard.receiveAttack([4, 0]);
+  expect(testBoard.isBoardShipsSunk()).toBe(true);
+});
 
-test('player func creates player1 ', () => {
-  const testPlayer1 = player()
-  expect(testPlayer1).toEqual({name: 'Player', score: 0, turn: null})
-})
+test("player func creates player1 ", () => {
+  const testPlayer1 = player();
+  expect(testPlayer1).toEqual({ name: "Player", score: 0, turn: null });
+});
 
-test('cpu func creates cpu', () => {
-  expect(computer().getComputer()).toEqual({name: 'Computer', score: 0, turn: null})
-})
+test("cpu func creates cpu", () => {
+  expect(computer().getComputer()).toEqual({
+    name: "Computer",
+    score: 0,
+    turn: null,
+  });
+});
 
-test('cpu can make a random move', () => {
-  expect(computer().generateMove()).toHaveLength(2)
-})
+test("cpu can make a random move", () => {
+  expect(computer().generateMove()).toHaveLength(2);
+});
 
 // test('game create player board', () => {
 //   expect(game()).toBe()
