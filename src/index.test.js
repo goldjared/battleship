@@ -1,7 +1,7 @@
 /**
  * @jest-environment jsdom
  */
-import { ship, gameBoard, player, computer } from "./index.js";
+import { ship, gameBoard, player, generateMove } from "./index.js";
 const testShip = ship(2);
 
 test("should return object with ship length, hits, and whether sunk/or not", () => {
@@ -76,12 +76,12 @@ test("gameboard should report all ships are sunk", () => {
 });
 
 test("player func creates player1 ", () => {
-  const testPlayer1 = player();
-  expect(testPlayer1).toEqual({ name: "Player", score: 0, turn: null });
+  const testPlayer1 = player('Player');
+  expect(testPlayer1.getPlayer()).toEqual({ name: "Player", score: 0, turn: null });
 });
 
 test("cpu func creates cpu", () => {
-  expect(computer().getComputer()).toEqual({
+  expect(player('Computer').getPlayer()).toEqual({
     name: "Computer",
     score: 0,
     turn: null,
@@ -89,7 +89,7 @@ test("cpu func creates cpu", () => {
 });
 
 test("cpu can make a random move", () => {
-  expect(computer().generateMove()).toHaveLength(2);
+  expect(generateMove()).toHaveLength(2);
 });
 
 // test('game create player board', () => {
@@ -99,3 +99,15 @@ test("cpu can make a random move", () => {
 // test('game create player board', () => {
 //   expect(testBoard.getBoard()).toBe()
 // })
+
+test('player 1 can attack enemy board. attack [7,9] to be true.', () => {
+  //player 1 attack a coord, call receive attack on enemyboard (param)
+  const cpu1Board = gameBoard();
+  const testPlayer1 = player();
+  cpu1Board.placeShip([0, 0], [1, 0], [2, 0], [3, 0], [4, 0]);
+  cpu1Board.placeShip([0, 8], [0, 9]);
+  cpu1Board.placeShip([4, 6], [4, 7], [4, 8], [4, 9]);
+  cpu1Board.placeShip([7, 3]);
+  cpu1Board.placeShip([7, 9], [8, 9], [9, 9]);
+  expect(testPlayer1.attack([7,9], cpu1Board)).toBe(true)
+})
