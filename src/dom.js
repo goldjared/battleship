@@ -12,4 +12,12 @@ function gameBoardDisplay(board) {
   body.append(container);
 }
 
-export { gameBoardDisplay };
+function boardListener() {
+  const boardContainer = document.querySelector('.container')
+  boardContainer.addEventListener('click', (e) => {
+    const clickedSpot = e.target.dataset.coord.split(',').map(Number);
+    console.log(clickedSpot)
+  })
+}
+
+export { gameBoardDisplay, boardListener };
