@@ -137,6 +137,11 @@ header {
 }
 
 .container {
+  display: flex;
+  gap: 5em;
+}
+
+.board-container {
   background-color: rgb(223, 197, 197);
   display: grid;
   grid-template-columns: repeat(10, auto);
