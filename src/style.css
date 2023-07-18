@@ -1,5 +1,5 @@
 :root {
-  background-color: darkgreen;
+  background-color: rgb(94, 95, 94);
 }
 
 /* http://meyerweb.com/eric/tools/css/reset/ 
@@ -132,17 +132,21 @@ table {
   border-spacing: 0;
 }
 
+header {
+  background-color: rgb(201, 201, 201);
+}
+
 .container {
   background-color: rgb(223, 197, 197);
   display: grid;
   grid-template-columns: repeat(10, auto);
   grid-template-rows: repeat(10, auto);
   max-width: 50%;
+  max-height: 50%;
   border: 1px solid red;
 }
 
 .game-square {
   border: 1px solid black;
-  width: auto;
-  height: auto;
+  aspect-ratio: 1;
 }
