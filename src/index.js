@@ -89,9 +89,9 @@ function gameBoard() {
   };
 }
 
-function player() {
+function player(name) {
   const playerObj = {
-    name: "Player",
+    name,
     score: 0,
     turn: null,
   };
@@ -102,31 +102,19 @@ function player() {
 
   const getPlayer = () => playerObj;
 
-  return { attack, getPlayer }
+  return { attack, getPlayer };
 }
-
-function computer() {
-  const computerObj = {
-    name: "Computer",
-    score: 0,
-    turn: null,
-  };
-
-  function generateMove() {
-    const moveArray = [];
-    while (moveArray.length < 2) {
-      const randomNumber = Math.floor(Math.random() * 10);
-      moveArray.push(randomNumber);
-    }
-    return moveArray;
+function generateMove() {
+  const moveArray = [];
+  while (moveArray.length < 2) {
+    const randomNumber = Math.floor(Math.random() * 10);
+    moveArray.push(randomNumber);
   }
-
-  const getComputer = () => computerObj;
-  return { getComputer, generateMove };
+  return moveArray;
 }
 
 function game() {
-  const player1 = player();
+  const player1 = player("player");
   const player1Board = gameBoard();
   player1Board.placeShip([0, 0], [1, 0], [2, 0], [3, 0], [4, 0]);
   player1Board.placeShip([0, 8], [0, 9]);
@@ -135,7 +123,7 @@ function game() {
   player1Board.placeShip([7, 9], [8, 9], [9, 9]);
   gameBoardDisplay(player1Board);
 
-  const cpu1 = computer();
+  const cpu1 = player("cpu");
   const cpu1Board = gameBoard();
   cpu1Board.placeShip([0, 0], [1, 0], [2, 0], [3, 0], [4, 0]);
   cpu1Board.placeShip([0, 8], [0, 9]);
@@ -145,4 +133,4 @@ function game() {
 }
 
 game();
-export { ship, gameBoard, player, computer, game };
+export { ship, gameBoard, player, generateMove, game };
