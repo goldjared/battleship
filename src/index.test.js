@@ -111,3 +111,14 @@ test('player 1 can attack enemy board. attack [7,9] to be true.', () => {
   cpu1Board.placeShip([7, 9], [8, 9], [9, 9]);
   expect(testPlayer1.attack([7,9], cpu1Board)).toBe(true)
 })
+
+test('cpu can attack enemy board. attack randomGen to be true.', () => {
+  const cpu1Board = gameBoard();
+  const testCpu = player('cpu');
+  cpu1Board.placeShip([0, 0], [1, 0], [2, 0], [3, 0], [4, 0]);
+  cpu1Board.placeShip([0, 8], [0, 9]);
+  cpu1Board.placeShip([4, 6], [4, 7], [4, 8], [4, 9]);
+  cpu1Board.placeShip([7, 3]);
+  cpu1Board.placeShip([7, 9], [8, 9], [9, 9]);
+  expect(typeof (testCpu.attack(generateMove(), cpu1Board))).toBe('boolean')
+})
