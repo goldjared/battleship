@@ -90,11 +90,19 @@ function gameBoard() {
 }
 
 function player() {
-  return {
+  const playerObj = {
     name: "Player",
     score: 0,
     turn: null,
   };
+
+  function attack(coord, enemyBoard) {
+    return enemyBoard.receiveAttack(coord);
+  }
+
+  const getPlayer = () => playerObj;
+
+  return { attack, getPlayer }
 }
 
 function computer() {
