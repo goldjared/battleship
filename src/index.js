@@ -93,7 +93,7 @@ function player(name) {
   const playerObj = {
     name,
     score: 0,
-    turn: null,
+    turn: false,
   };
 
   function attack(coord, enemyBoard) {

@@ -77,7 +77,7 @@ test("gameboard should report all ships are sunk", () => {
 
 test("player func creates player1 ", () => {
   const testPlayer1 = player('Player');
-  expect(testPlayer1.getPlayer()).toEqual({ name: "Player", score: 0, turn: null });
+  expect(testPlayer1.getPlayer()).toEqual({ name: "Player", score: 0, turn: false });
 });
 
 test("cpu func creates cpu", () => {
