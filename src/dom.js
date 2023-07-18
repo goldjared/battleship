@@ -1,15 +1,15 @@
 function gameBoardDisplay(board) {
-  const container = document.createElement("div");
-  container.classList.add("container");
-  const body = document.querySelector("body");
+  const container = document.querySelector('.container')
+  const boardContainer = document.createElement("div");
+  boardContainer.classList.add("board-container");
   board.getBoard().forEach((spot) => {
     const boardSpot = document.createElement("div");
     boardSpot.classList.add("game-square");
     boardSpot.dataset.coord = spot.data;
     boardSpot.textContent = spot.data;
-    container.append(boardSpot);
+    boardContainer.append(boardSpot);
   });
-  body.append(container);
+  container.append(boardContainer)
 }
 
 function boardListener() {
