@@ -1,7 +1,8 @@
-function gameBoardDisplay(board) {
+function gameBoardDisplay(board, playerOrCpu) {
   const container = document.querySelector('.container')
   const boardContainer = document.createElement("div");
   boardContainer.classList.add("board-container");
+  boardContainer.id = playerOrCpu;
   board.getBoard().forEach((spot) => {
     const boardSpot = document.createElement("div");
     boardSpot.classList.add("game-square");
