@@ -33,7 +33,6 @@ function gameBoard() {
       board.push({ data: [i, j], ship: false });
     }
   }
-  1;
   const getMissedAttacks = () => missedAttackCoords;
   const getBoard = () => board;
   const searchBoard = (coord) => {
