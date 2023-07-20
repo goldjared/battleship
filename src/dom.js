@@ -13,12 +13,4 @@ function gameBoardDisplay(board, playerOrCpu) {
   container.append(boardContainer)
 }
 
-function boardListener() {
-  const boardContainer = document.querySelector('.container')
-  boardContainer.addEventListener('click', (e) => {
-    const clickedSpot = e.target.dataset.coord.split(',').map(Number);
-    console.log(clickedSpot)
-  })
-}
-
-export { gameBoardDisplay, boardListener };
+export { gameBoardDisplay };
