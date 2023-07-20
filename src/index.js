@@ -33,6 +33,7 @@ function gameBoard() {
       board.push({ data: [i, j], ship: false });
     }
   }
+  1;
   const getMissedAttacks = () => missedAttackCoords;
   const getBoard = () => board;
   const searchBoard = (coord) => {
@@ -110,6 +111,7 @@ function generateMove() {
     const randomNumber = Math.floor(Math.random() * 10);
     moveArray.push(randomNumber);
   }
+  console.log(moveArray);
   return moveArray;
 }
 
@@ -121,7 +123,7 @@ function game() {
   player1Board.placeShip([4, 6], [4, 7], [4, 8], [4, 9]);
   player1Board.placeShip([7, 3]);
   player1Board.placeShip([7, 9], [8, 9], [9, 9]);
-  gameBoardDisplay(player1Board);
+  gameBoardDisplay(player1Board, "player");
 
   const cpu1 = player("cpu");
   const cpu1Board = gameBoard();
@@ -130,6 +132,19 @@ function game() {
   cpu1Board.placeShip([4, 6], [4, 7], [4, 8], [4, 9]);
   cpu1Board.placeShip([7, 3]);
   cpu1Board.placeShip([7, 9], [8, 9], [9, 9]);
+  gameBoardDisplay(cpu1Board, "cpu");
+
+  const enemyBoardContainer = document.getElementById("cpu");
+  enemyBoardContainer.addEventListener("click", (e) => {
+    const clickedSpot = e.target.dataset.coord.split(",").map(Number);
+    player1.attack(clickedSpot, cpu1Board);
+    console.log(cpu1Board.isBoardShipsSunk());
+    // setInterval(() => {
+
+    // })
+    cpu1.attack(generateMove(), player1Board);
+    console.log(player1Board.isBoardShipsSunk(), "is player board sunk");
+  });
 }
 
 game();
