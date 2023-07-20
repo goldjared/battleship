@@ -7,6 +7,10 @@ function gameBoardDisplay(board, playerOrCpu) {
     const boardSpot = document.createElement("div");
     boardSpot.classList.add("game-square");
     boardSpot.dataset.coord = spot.data;
+
+    if(spot.ship !== false && playerOrCpu === 'player') {
+      boardSpot.id = 'ship'
+    }
     boardSpot.textContent = spot.data;
     boardContainer.append(boardSpot);
   });
