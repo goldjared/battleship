@@ -157,3 +157,16 @@ header {
   border: 1px solid black;
   aspect-ratio: 1;
 }
+
+
+.game-square#ship {
+  background-color: rgb(255, 169, 169);
+}
+
+#cpu .game-square:hover {
+  background-color: rgb(255, 0, 43);
+}
+
+#cpu .game-square:active {
+  background-color: rgb(255, 255, 255);
+}
