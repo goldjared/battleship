@@ -1,5 +1,6 @@
+const container = document.querySelector('.container')
+
 function gameBoardDisplay(board, playerOrCpu) {
-  const container = document.querySelector('.container')
   const boardContainer = document.createElement("div");
   boardContainer.classList.add("board-container");
   boardContainer.id = playerOrCpu;
@@ -17,4 +18,12 @@ function gameBoardDisplay(board, playerOrCpu) {
   container.append(boardContainer)
 }
 
-export { gameBoardDisplay };
+function gameOverDisplay(winner) {
+const displayWinner = document.createElement('div')
+displayWinner.id = 'winner'
+displayWinner.textContent = `${winner} won! Gameover.` 
+
+container.append(displayWinner)
+}
+
+export { gameBoardDisplay, gameOverDisplay };
