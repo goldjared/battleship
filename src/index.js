@@ -1,5 +1,5 @@
 import "./style.css";
-import { gameBoardDisplay } from "./dom";
+import { gameBoardDisplay, gameOverDisplay } from "./dom";
 
 function ship(x) {
   const length = x;
@@ -110,14 +110,13 @@ function generateMove() {
     const randomNumber = Math.floor(Math.random() * 10);
     moveArray.push(randomNumber);
   }
-  console.log(moveArray);
   return moveArray;
 }
 
 function game() {
-  function checkEndGame(board, playerx) {
+  function checkEndGame(board, playerName) {
     if(board.isBoardShipsSunk()) {
-      return console.log(`${playerx  }won`);
+      return gameOverDisplay(playerName);
     }
     return false;
   }
