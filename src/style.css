@@ -132,13 +132,21 @@ table {
   border-spacing: 0;
 }
 
+body {
+  display: flex;
+  flex-direction: column;
+  gap: 5rem;
+}
+
 header {
   background-color: rgb(201, 201, 201);
+  padding: 20px;
 }
 
 .container {
   display: flex;
   gap: 5em;
+  justify-content: center;
 }
 
 .board-container {
@@ -148,16 +156,16 @@ header {
   grid-template-rows: repeat(10, auto);
   width: 50%;
   height: 50%;
-  max-height: 35em;
-  max-width: 35em;
+  max-height: 25em;
+  max-width: 25em;
   border: 1px solid rgb(255, 0, 0);
+  padding: 10px;
 }
 
 .game-square {
   border: 1px solid black;
   aspect-ratio: 1;
 }
-
 
 .game-square#ship {
   background-color: rgb(255, 169, 169);

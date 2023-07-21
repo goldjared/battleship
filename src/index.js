@@ -115,7 +115,7 @@ function generateMove() {
 
 function game() {
   function checkEndGame(board, playerName) {
-    if(board.isBoardShipsSunk()) {
+    if (board.isBoardShipsSunk()) {
       return gameOverDisplay(playerName);
     }
     return false;
@@ -143,12 +143,11 @@ function game() {
   enemyBoardContainer.addEventListener("click", (e) => {
     const clickedSpot = e.target.dataset.coord.split(",").map(Number);
     player1.attack(clickedSpot, cpu1Board);
-    checkEndGame(cpu1Board, 'player1')
+    checkEndGame(cpu1Board, "player1");
 
     cpu1.attack(generateMove(), player1Board);
-    checkEndGame(player1Board, 'cpu')
+    checkEndGame(player1Board, "cpu");
   });
-
 }
 
 game();

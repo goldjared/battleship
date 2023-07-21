@@ -1,4 +1,4 @@
-const container = document.querySelector('.container')
+const container = document.querySelector(".container");
 
 function gameBoardDisplay(board, playerOrCpu) {
   const boardContainer = document.createElement("div");
@@ -9,21 +9,21 @@ function gameBoardDisplay(board, playerOrCpu) {
     boardSpot.classList.add("game-square");
     boardSpot.dataset.coord = spot.data;
 
-    if(spot.ship !== false && playerOrCpu === 'player') {
-      boardSpot.id = 'ship'
+    if (spot.ship !== false && playerOrCpu === "player") {
+      boardSpot.id = "ship";
     }
-    boardSpot.textContent = spot.data;
+    // boardSpot.textContent = spot.data;
     boardContainer.append(boardSpot);
   });
-  container.append(boardContainer)
+  container.append(boardContainer);
 }
 
 function gameOverDisplay(winner) {
-const displayWinner = document.createElement('div')
-displayWinner.id = 'winner'
-displayWinner.textContent = `${winner} won! Gameover.` 
+  const displayWinner = document.createElement("div");
+  displayWinner.id = "winner";
+  displayWinner.textContent = `${winner} won! Gameover.`;
 
-container.append(displayWinner)
+  container.append(displayWinner);
 }
 
 export { gameBoardDisplay, gameOverDisplay };
