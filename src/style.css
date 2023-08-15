@@ -168,12 +168,12 @@ header {
 }
 
 .game-square#ship {
-  background-color: rgb(255, 169, 169);
   background-color: hsl(0, 36%, 63%);
 }
 
 #cpu .game-square:hover {
-  background-color: rgb(177, 0, 0);
+
+  background-color: rgb(255, 229, 229);
 }
 
 #cpu .game-square:active {
