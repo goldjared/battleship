@@ -1,5 +1,5 @@
 import "./style.css";
-import { gameBoardDisplay, gameOverDisplay } from "./dom";
+import { hitShipDisplay, gameBoardDisplay, gameOverDisplay } from "./dom";
 
 function ship(x) {
   const length = x;
@@ -142,7 +142,11 @@ function game() {
   const enemyBoardContainer = document.getElementById("cpu");
   enemyBoardContainer.addEventListener("click", (e) => {
     const clickedSpot = e.target.dataset.coord.split(",").map(Number);
-    player1.attack(clickedSpot, cpu1Board);
+    if(player1.attack(clickedSpot, cpu1Board)) { // square bg color on hit
+      e.target.style.backgroundColor = 'rgb(255, 0, 43)'
+    } else { // square bg color on miss
+      e.target.style.backgroundColor = 'rgb(146, 136, 136)'
+    }
     checkEndGame(cpu1Board, "player1");
 
     cpu1.attack(generateMove(), player1Board);
