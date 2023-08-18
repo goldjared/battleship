@@ -30,7 +30,7 @@ function gameBoard() {
   const missedAttackCoords = [];
   for (let i = 0; i < 10; i++) {
     for (let j = 0; j < 10; j++) {
-      board.push({ data: [i, j], ship: false });
+      board.push({ data: [i, j], ship: false, marked: false });
     }
   }
   const getMissedAttacks = () => missedAttackCoords;
@@ -71,6 +71,7 @@ function gameBoard() {
 
   function receiveAttack(target) {
     const targetPosition = searchBoard(target);
+    if (!targetPosition.marked) targetPosition.marked = true;
     if (targetPosition.ship !== false) {
       targetPosition.ship.hit();
       return true;
@@ -104,12 +105,19 @@ function player(name) {
 
   return { attack, getPlayer };
 }
-function generateMove() {
-  const moveArray = [];
+function generateMove(playerBoard) {
+  let moveArray = [];
   while (moveArray.length < 2) {
     const randomNumber = Math.floor(Math.random() * 10);
     moveArray.push(randomNumber);
+    if (moveArray.length > 1) {
+      if (playerBoard.searchBoard(moveArray).marked) {
+        console.log("HITHITHIT");
+        moveArray = [];
+      }
+    }
   }
+
   return moveArray;
 }
 
