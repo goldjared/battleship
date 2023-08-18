@@ -26,4 +26,16 @@ function gameOverDisplay(winner) {
   container.append(displayWinner);
 }
 
-export { gameBoardDisplay, gameOverDisplay };
+function attackDisplay(targetHtmlElement, attackBoolean) {
+  const boardSquareElement = targetHtmlElement;
+
+  if (attackBoolean) {
+    // square bg color on hit
+    boardSquareElement.style.backgroundColor = "rgb(255, 0, 43)";
+  } else {
+    // square bg color on miss
+    boardSquareElement.style.backgroundColor = "rgb(146, 136, 136)";
+  }
+}
+
+export { gameBoardDisplay, gameOverDisplay, attackDisplay };
