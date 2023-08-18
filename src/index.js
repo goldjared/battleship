@@ -1,5 +1,5 @@
 import "./style.css";
-import { hitShipDisplay, gameBoardDisplay, gameOverDisplay } from "./dom";
+import { gameBoardDisplay, gameOverDisplay, attackDisplay } from "./dom";
 
 function ship(x) {
   const length = x;
@@ -27,13 +27,13 @@ function ship(x) {
 function gameBoard() {
   const board = [];
   const boardShips = [];
-  const missedAttackCoords = [];
+  // const missedAttackCoords = [];
   for (let i = 0; i < 10; i++) {
     for (let j = 0; j < 10; j++) {
       board.push({ data: [i, j], ship: false, marked: false });
     }
   }
-  const getMissedAttacks = () => missedAttackCoords;
+  // const getMissedAttacks = () => missedAttackCoords;
   const getBoard = () => board;
   const searchBoard = (coord) => {
     const target = board.find(
@@ -76,7 +76,7 @@ function gameBoard() {
       targetPosition.ship.hit();
       return true;
     }
-    missedAttackCoords.push(target);
+    // missedAttackCoords.push(target); // pointless?
     return false;
   }
 
@@ -85,7 +85,6 @@ function gameBoard() {
     getBoard,
     searchBoard,
     receiveAttack,
-    getMissedAttacks,
     isBoardShipsSunk,
   };
 }
@@ -150,17 +149,22 @@ function game() {
   const enemyBoardContainer = document.getElementById("cpu");
   enemyBoardContainer.addEventListener("click", (e) => {
     const clickedSpot = e.target.dataset.coord.split(",").map(Number);
-    if(player1.attack(clickedSpot, cpu1Board)) { // square bg color on hit
-      e.target.style.backgroundColor = 'rgb(255, 0, 43)'
-    } else { // square bg color on miss
-      e.target.style.backgroundColor = 'rgb(146, 136, 136)'
-    }
-    checkEndGame(cpu1Board, "player1");
+    const player1AttackBoolean = player1.attack(clickedSpot, cpu1Board);
+    attackDisplay(e.target, player1AttackBoolean);
+    checkEndGame(cpu1Board, "player1"); // think this goes here?
 
-    cpu1.attack(generateMove(), player1Board);
+    const cpu1RandomMove = generateMove(player1Board);
+    const cpu1AttackBoolean = cpu1.attack(cpu1RandomMove, player1Board);
+    const playerBoardDom = document.getElementById("player");
+    const cpu1AttackedSquareElement = playerBoardDom.querySelectorAll(
+      `:scope > [data-coord="${cpu1RandomMove[0]},${cpu1RandomMove[1]}"]`
+    );
+    attackDisplay(cpu1AttackedSquareElement[0], cpu1AttackBoolean);
+
     checkEndGame(player1Board, "cpu");
   });
 }
 
 game();
+
 export { ship, gameBoard, player, generateMove };
