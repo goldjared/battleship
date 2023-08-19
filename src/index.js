@@ -109,12 +109,10 @@ function generateMove(playerBoard) {
   while (moveArray.length < 2) {
     const randomNumber = Math.floor(Math.random() * 10);
     moveArray.push(randomNumber);
-    if (moveArray.length > 1) {
-      if (playerBoard.searchBoard(moveArray).marked) {
-        console.log("HITHITHIT");
-        moveArray = [];
-        // note: there is inf loop here.
-      }
+    if (moveArray.length > 1 && playerBoard.searchBoard(moveArray).marked) {
+      console.log("HITHITHIT");
+      moveArray = [];
+      // note: there is inf loop here.
     }
   }
 
@@ -151,7 +149,6 @@ function game() {
   enemyBoardContainer.addEventListener("click", (e) => {
     const clickedSpot = e.target.dataset.coord.split(",").map(Number);
     if (cpu1Board.searchBoard(clickedSpot).marked) {
-      console.log("FUCK");
       return;
     }
     const player1AttackBoolean = player1.attack(clickedSpot, cpu1Board);
