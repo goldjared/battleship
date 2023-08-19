@@ -113,6 +113,7 @@ function generateMove(playerBoard) {
       if (playerBoard.searchBoard(moveArray).marked) {
         console.log("HITHITHIT");
         moveArray = [];
+        // note: there is inf loop here.
       }
     }
   }
@@ -149,6 +150,10 @@ function game() {
   const enemyBoardContainer = document.getElementById("cpu");
   enemyBoardContainer.addEventListener("click", (e) => {
     const clickedSpot = e.target.dataset.coord.split(",").map(Number);
+    if (cpu1Board.searchBoard(clickedSpot).marked) {
+      console.log("FUCK");
+      return;
+    }
     const player1AttackBoolean = player1.attack(clickedSpot, cpu1Board);
     attackDisplay(e.target, player1AttackBoolean);
     checkEndGame(cpu1Board, "player1"); // think this goes here?
