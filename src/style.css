@@ -171,8 +171,8 @@ header {
   background-color: hsl(0, 36%, 63%);
 }
 
-#cpu .game-square:hover {
-
+#cpu .game-square:hover,
+.ship-menu > button:hover {
   background-color: rgb(255, 229, 229);
 }
 
@@ -196,7 +196,27 @@ header {
 
 .ship-menu {
   width: 500px;
+  display: flex;
+  flex-direction: column;
+  padding: 10px;
   background-color: #630505;
+}
+
+.ship-menu > button {
+  border-radius: 5px;
+  background-color: rgb(255, 184, 184);
+  color: rgb(109, 9, 9);
+  font-weight: bold;
+}
+
+.ship-select-btn.disabled-btn,
+#temp-disable {
+  background-color: rgb(83, 3, 3);
+}
+
+.ship-select-btn.disabled-btn:hover,
+#temp-disable:hover {
+  background-color: rgb(83, 3, 3);
 }
 
 .selected {
@@ -207,7 +227,7 @@ header {
   /* width: 100px; */
   /* height: 100px; */
   background-color: rgb(52, 106, 255);
-  border: 1px solid rgb(230, 230, 230); 
+  border: 1px solid rgb(230, 230, 230);
   position: absolute;
   visibility: hidden;
   opacity: 80%;
