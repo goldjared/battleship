@@ -11,11 +11,7 @@ export default function shipDomPlacement() {
   square.classList.add("mouse-tracer");
   let gameBoardSquareHeight = playerBoard.firstChild.offsetHeight;
   let gameBoardSquareWidth = playerBoard.firstChild.offsetWidth;
-  let gameBoardSquareHeightDefault = gameBoardSquareHeight;
-
-  // const ship5 = document.createElement("button");
-  // ship5.dataset.length = 5;
-  // ship5.textContent = "ship5";
+  const gameBoardSquareHeightDefault = gameBoardSquareHeight;
 
   const gameShipDataArr = [
     { name: "Carrier", length: 5 },
@@ -42,16 +38,15 @@ export default function shipDomPlacement() {
   // listener on menu for what ship is clicked
   function shipMenuController(e) {
     if (e.target.localName === "button") {
-      console.log(e.target.textContent);
-
       // disable button after clicked
       e.target.disabled = true;
-      e.target.id = "disabled-btn";
+      e.target.classList.add("disabled-btn");
 
       // need to rework this toggle, so it turns on on click 1, and off by ship place 5th ship
       playerBoard.classList.toggle("selected");
       shipLength = e.target.dataset.length;
       shipHoverMouse();
+      shipMenuBtnController().temporaryDisableBtns();
 
       playerBoard.addEventListener("click", pBoardListener);
     }
@@ -59,24 +54,19 @@ export default function shipDomPlacement() {
   shipMenuGUI.addEventListener("click", shipMenuController);
 
   function pBoardListener(e) {
-    let baseCoord = e.target.dataset.coord.split(",").map(Number);
+    const baseCoord = e.target.dataset.coord.split(",").map(Number);
     let direction = "";
     if (gameBoardSquareHeight > gameBoardSquareWidth) {
-      console.log("VERTICAL");
       direction = "vertical";
       console.log(shipLength);
     } else {
-      console.log("HORIZONTAL");
       direction = "horizontal";
     }
+
     calculateShipArr(direction, baseCoord);
   }
 
   function calculateShipArr(direction, baseCoord) {
-    /*
-
-    */
-    //  console.log(baseCoord);
     const arrHolder = [];
     const coordLengthVal = Math.floor(shipLength / 2);
     if (direction === "vertical") {
@@ -106,7 +96,46 @@ export default function shipDomPlacement() {
     disableShipHoverDisplay();
     resetGameBoardSquareHeightWidth();
     enableRightClickShipHovDisplay();
+
+    shipMenuBtnController().unlockAvailableBtns();
+    // check if all ship menu btns are disabled, remove menu if so.
+    if (shipMenuBtnController().isAllDisabled()) {
+      shipMenuGUI.remove();
+      // can reset all buttons to enabled also.
+    }
     console.log(arrHolder);
+  }
+
+  function shipMenuBtnController() {
+    const shipMenuBtns = shipMenuGUI.children;
+    function isAllDisabled() {
+      for (let i = 0; i < shipMenuBtns.length; i++) {
+        if (!shipMenuBtns[i].disabled) {
+          return false;
+        }
+      }
+      return true;
+    }
+
+    function temporaryDisableBtns() {
+      for (let i = 0; i < shipMenuBtns.length; i++) {
+        if (!shipMenuBtns[i].disabled) {
+          shipMenuBtns[i].disabled = true;
+          shipMenuBtns[i].id = "temp-disable";
+        }
+      }
+    }
+
+    function unlockAvailableBtns() {
+      for (let i = 0; i < shipMenuBtns.length; i++) {
+        if (shipMenuBtns[i].id === "temp-disable") {
+          shipMenuBtns[i].disabled = false;
+          shipMenuBtns[i].removeAttribute("id");
+        }
+      }
+    }
+
+    return { isAllDisabled, temporaryDisableBtns, unlockAvailableBtns };
   }
 
   function resetGameBoardSquareHeightWidth() {
@@ -168,11 +197,5 @@ export default function shipDomPlacement() {
     document.addEventListener("mousemove", shipHoverDisplay);
     document.addEventListener("contextmenu", disableRightClickShipHovDisplay);
     document.addEventListener("keydown", enableContextMenu);
-
-    // document.addEventListener("click", (e => {
-    //   e.preventDefault();
-    //   pBoardListener(e);
-
-    // }))
   }
 }
