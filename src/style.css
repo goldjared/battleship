@@ -193,3 +193,24 @@ header {
 .hit-ship {
   background-color: #630505;
 }
+
+.ship-menu {
+  width: 500px;
+  background-color: #630505;
+}
+
+.selected {
+  border: 3px dotted rgb(37, 255, 84);
+}
+
+.mouse-tracer {
+  /* width: 100px; */
+  /* height: 100px; */
+  background-color: rgb(52, 106, 255);
+  border: 1px solid rgb(230, 230, 230); 
+  position: absolute;
+  visibility: hidden;
+  opacity: 80%;
+  /* point events for ignore the tracer div via listeners */
+  pointer-events: none;
+}
