@@ -5,6 +5,7 @@ export default function shipDomPlacement() {
   const playerBoard = document.getElementById("player");
   const shipMenuGUI = document.createElement("div");
   shipMenuGUI.classList.add("ship-menu");
+  playerBoard.classList.toggle("selected");
 
   // square tracer code
   const square = document.createElement("div");
@@ -30,10 +31,7 @@ export default function shipDomPlacement() {
     shipMenuGUI.append(shipBtn);
   }
 
-  // shipMenuGUI.append(ship5);
   container.append(shipMenuGUI);
-  // * after all 5 ship buttons is disabled, make placeshipGUI vanish. also toggle off
-  // playerBoard selected class
 
   // listener on menu for what ship is clicked
   function shipMenuController(e) {
@@ -42,8 +40,6 @@ export default function shipDomPlacement() {
       e.target.disabled = true;
       e.target.classList.add("disabled-btn");
 
-      // need to rework this toggle, so it turns on on click 1, and off by ship place 5th ship
-      playerBoard.classList.toggle("selected");
       shipLength = e.target.dataset.length;
       shipHoverMouse();
       shipMenuBtnController().temporaryDisableBtns();
@@ -102,6 +98,9 @@ export default function shipDomPlacement() {
     if (shipMenuBtnController().isAllDisabled()) {
       shipMenuGUI.remove();
       // can reset all buttons to enabled also.
+
+      playerBoard.classList.toggle("selected");
+      console.log("tick tick");
     }
     console.log(arrHolder);
   }
