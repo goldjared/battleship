@@ -1,8 +1,19 @@
+// import { player1Board } from ".";
+
 const container = document.querySelector(".container");
 
-export default function shipDomPlacement() {
+const gameShipDataArr = [
+  { name: "Carrier", length: 5 },
+  { name: "Battleship", length: 4 },
+  { name: "Destroyer", length: 3 },
+  { name: "Submarine", length: 3 },
+  { name: "Patrol Boat", length: 2 },
+];
+
+export default function shipDomPlacement(board) {
   let shipLength = 0;
   const playerBoard = document.getElementById("player");
+
   const shipMenuGUI = document.createElement("div");
   shipMenuGUI.classList.add("ship-menu");
   playerBoard.classList.toggle("selected");
@@ -14,13 +25,6 @@ export default function shipDomPlacement() {
   let gameBoardSquareWidth = playerBoard.firstChild.offsetWidth;
   const gameBoardSquareHeightDefault = gameBoardSquareHeight;
 
-  const gameShipDataArr = [
-    { name: "Carrier", length: 5 },
-    { name: "Battleship", length: 4 },
-    { name: "Destroyer", length: 3 },
-    { name: "Submarine", length: 3 },
-    { name: "Patrol Boat", length: 2 },
-  ];
   // create ship selections buttons
   for (let i = 0; i <= 4; i++) {
     const shipBtn = document.createElement("button");
@@ -62,9 +66,14 @@ export default function shipDomPlacement() {
     calculateShipArr(direction, baseCoord);
   }
 
+  function removePBoardListener() {
+    playerBoard.removeEventListener("click", pBoardListener);
+  }
+
   function calculateShipArr(direction, baseCoord) {
     const arrHolder = [];
     const coordLengthVal = Math.floor(shipLength / 2);
+
     if (direction === "vertical") {
       for (
         let i = baseCoord[0] + coordLengthVal;
@@ -72,7 +81,9 @@ export default function shipDomPlacement() {
         i--
       ) {
         if (i < 0 || i > 9) return console.log("ERROR, out of bound");
-
+        if (board.searchBoard([i, baseCoord[1]]).ship !== false) {
+          return console.log("ERROR, squares not available.");
+        }
         const tempCalculatedCoord = [i, baseCoord[1]];
         arrHolder.push(tempCalculatedCoord);
       }
@@ -83,15 +94,22 @@ export default function shipDomPlacement() {
         j--
       ) {
         if (j < 0 || j > 9) return console.log("ERROR, out of bound");
+        if (board.searchBoard([baseCoord[0], j]).ship !== false) {
+          return console.log("ERROR, squares not available.");
+        }
 
         const tempCalculatedCoord = [baseCoord[0], j];
+        // check if ship array contains this coord. if so, return ERROR, ship exists.
+
         arrHolder.push(tempCalculatedCoord);
       }
     }
     // remove event listeners working with ship placement gui
+
     disableShipHoverDisplay();
     resetGameBoardSquareHeightWidth();
     enableRightClickShipHovDisplay();
+    removePBoardListener();
 
     shipMenuBtnController().unlockAvailableBtns();
     // check if all ship menu btns are disabled, remove menu if so.
@@ -102,7 +120,8 @@ export default function shipDomPlacement() {
       playerBoard.classList.toggle("selected");
       console.log("tick tick");
     }
-    console.log(arrHolder);
+    board.placeShip(arrHolder);
+    // place ship here.
   }
 
   function shipMenuBtnController() {
