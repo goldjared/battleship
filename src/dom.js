@@ -1,5 +1,3 @@
-import { doc } from "prettier";
-
 const container = document.querySelector(".container");
 
 function gameBoardDisplay(board, playerOrCpu) {
@@ -21,7 +19,16 @@ function gameBoardDisplay(board, playerOrCpu) {
   container.append(boardContainer);
 }
 
-
+function placeShipOnBoard(board) {
+  board.getBoard().forEach((spot) => {
+    if (spot.ship !== false) {
+      const shipCoordElement = document.querySelector(
+        `[data-coord='${spot.data[0]},${spot.data[1]}']`
+      );
+      shipCoordElement.id = "ship";
+    }
+  });
+}
 
 function gameOverDisplay(winner) {
   const displayWinner = document.createElement("div");
@@ -43,4 +50,4 @@ function attackDisplay(targetHtmlElement, attackBoolean) {
   }
 }
 
-export { gameBoardDisplay, gameOverDisplay, attackDisplay };
+export { gameBoardDisplay, gameOverDisplay, attackDisplay, placeShipOnBoard };
