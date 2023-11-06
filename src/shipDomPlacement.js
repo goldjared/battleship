@@ -1,5 +1,3 @@
-// import { player1Board } from ".";
-
 const container = document.querySelector(".container");
 
 const gameShipDataArr = [
@@ -205,15 +203,16 @@ export default function shipDomPlacement(board) {
 
     container.append(square);
 
-    function enableContextMenu(e) {
-      e.preventDefault();
-      if (e.key === "Escape" || e.key === "escape") {
-        //turn off mouse hover, re enable button.
-      }
-    }
+    // function enableContextMenu(e) {
+    //   e.preventDefault();
+    //   if (e.key === "Escape" || e.key === "escape") {
+    //     // enableRightClickShipHovDisplay();
+
+    //   }
+    // }
 
     document.addEventListener("mousemove", shipHoverDisplay);
     document.addEventListener("contextmenu", disableRightClickShipHovDisplay);
-    document.addEventListener("keydown", enableContextMenu);
+    // document.addEventListener("keydown", enableContextMenu);
   }
 }
