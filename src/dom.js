@@ -13,7 +13,7 @@ function gameBoardDisplay(board, playerOrCpu) {
       boardSpot.id = "ship";
     }
     // numerical values on board display for debug
-    boardSpot.textContent = spot.data;
+    // // boardSpot.textContent = spot.data;
     boardContainer.append(boardSpot);
   });
   container.append(boardContainer);
