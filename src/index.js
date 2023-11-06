@@ -161,7 +161,11 @@ function game() {
     [4, 8],
     [4, 9],
   ]);
-  cpu1Board.placeShip([[7, 3]]);
+  cpu1Board.placeShip([
+    [7, 1],
+    [7, 2],
+    [7, 3],
+  ]);
   cpu1Board.placeShip([
     [7, 9],
     [8, 9],

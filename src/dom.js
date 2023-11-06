@@ -35,7 +35,15 @@ function gameOverDisplay(winner) {
   displayWinner.id = "winner";
   displayWinner.textContent = `${winner} won! Game over.`;
 
+  // const newGameBtn = document.createElement("button");
+  // newGameBtn.classList.add("new-game-btn");
+  // newGameBtn.textContent = "PLAY AGAIN"
+
   container.append(displayWinner);
+
+  setTimeout(() => {
+    location.reload();
+  }, 4000);
 }
 
 function attackDisplay(targetHtmlElement, attackBoolean) {
