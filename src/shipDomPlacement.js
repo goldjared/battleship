@@ -13,7 +13,15 @@ export default function shipDomPlacement(board) {
   const playerBoard = document.getElementById("player");
 
   const shipMenuGUI = document.createElement("div");
+  const shipMenuGUIHeader = document.createElement("h5");
+  const shipMenuGUISubHeader = document.createElement("p");
+  const shipMenuGUINote = document.createElement("p");
+  shipMenuGUIHeader.textContent = "BATTLESHIP";
+  shipMenuGUISubHeader.textContent = "PLACE SHIP";
+  shipMenuGUISubHeader.setAttribute("id", "ship-menu-subhead");
+  shipMenuGUINote.textContent = "RIGHT CLICK FOR ROTATION";
   shipMenuGUI.classList.add("ship-menu");
+  shipMenuGUI.append(shipMenuGUIHeader, shipMenuGUISubHeader);
   playerBoard.classList.toggle("selected");
 
   // square tracer code
@@ -32,6 +40,7 @@ export default function shipDomPlacement(board) {
 
     shipMenuGUI.append(shipBtn);
   }
+  shipMenuGUI.appendChild(shipMenuGUINote);
 
   container.append(shipMenuGUI);
 
@@ -112,18 +121,22 @@ export default function shipDomPlacement(board) {
     shipMenuBtnController().unlockAvailableBtns();
     // check if all ship menu btns are disabled, remove menu if so.
     if (shipMenuBtnController().isAllDisabled()) {
+      console.log("FIRE FIRE FIRE FIRE");
       shipMenuGUI.remove();
       // can reset all buttons to enabled also.
 
       playerBoard.classList.toggle("selected");
       console.log("tick tick");
     }
+    // on even shiplength, remove the extra coordinate.
+    if (shipLength % 2 === 0) {
+      arrHolder.pop();
+    }
     board.placeShip(arrHolder);
-    // place ship here.
   }
 
   function shipMenuBtnController() {
-    const shipMenuBtns = shipMenuGUI.children;
+    const shipMenuBtns = document.querySelectorAll("button");
     function isAllDisabled() {
       for (let i = 0; i < shipMenuBtns.length; i++) {
         if (!shipMenuBtns[i].disabled) {
