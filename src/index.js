@@ -171,6 +171,10 @@ function game() {
 
   const enemyBoardContainer = document.getElementById("cpu");
   enemyBoardContainer.addEventListener("click", (e) => {
+    const shipMenuGUI = document.querySelector(".ship-menu");
+    // make sure shipMenuGUI is gone before attacking can start.
+    if (shipMenuGUI !== null) return;
+
     const clickedSpot = e.target.dataset.coord.split(",").map(Number);
     if (cpu1Board.searchBoard(clickedSpot).marked) {
       return;
