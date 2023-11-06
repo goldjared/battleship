@@ -1,5 +1,11 @@
 import "./style.css";
-import { gameBoardDisplay, gameOverDisplay, attackDisplay } from "./dom";
+import {
+  gameBoardDisplay,
+  gameOverDisplay,
+  attackDisplay,
+  placeShipOnBoard,
+} from "./dom";
+import shipDomPlacement from "./shipDomPlacement";
 
 function ship(x) {
   const length = x;
@@ -27,13 +33,11 @@ function ship(x) {
 function gameBoard() {
   const board = [];
   const boardShips = [];
-  // const missedAttackCoords = [];
   for (let i = 0; i < 10; i++) {
     for (let j = 0; j < 10; j++) {
       board.push({ data: [i, j], ship: false, marked: false });
     }
   }
-  // const getMissedAttacks = () => missedAttackCoords;
   const getBoard = () => board;
   const searchBoard = (coord) => {
     const target = board.find(
@@ -43,11 +47,11 @@ function gameBoard() {
     return target;
   };
 
-  function placeShip(...coords) {
+  function placeShip(arrayOfCoords) {
     const queue = [];
-    const originalCoordLength = coords.length;
-    while (coords.length > 0) {
-      const currentCoord = coords.shift();
+    const originalCoordLength = arrayOfCoords.length;
+    while (arrayOfCoords.length > 0) {
+      const currentCoord = arrayOfCoords.shift();
       const coordObj = searchBoard(currentCoord);
       if (coordObj.ship === false) {
         queue.push(coordObj);
@@ -58,11 +62,13 @@ function gameBoard() {
     if (queue.length === originalCoordLength) {
       const newShipObj = ship(originalCoordLength);
       boardShips.push(newShipObj);
+
       while (queue.length > 0) {
         const linkingToShip = queue.shift();
         linkingToShip.ship = newShipObj;
       }
     }
+    placeShipOnBoard(player1Board);
   }
 
   function isBoardShipsSunk() {
@@ -76,7 +82,6 @@ function gameBoard() {
       targetPosition.ship.hit();
       return true;
     }
-    // missedAttackCoords.push(target); // pointless?
     return false;
   }
 
@@ -119,30 +124,49 @@ function generateMove(playerBoard) {
   return moveArray;
 }
 
+const player1Board = gameBoard();
+
 function game() {
   function checkEndGame(board, playerName) {
     if (board.isBoardShipsSunk()) {
+      // game();
       return gameOverDisplay(playerName);
     }
     return false;
   }
 
   const player1 = player("player");
-  const player1Board = gameBoard();
-  player1Board.placeShip([0, 0], [1, 0], [2, 0], [3, 0], [4, 0]);
-  player1Board.placeShip([0, 8], [0, 9]);
-  player1Board.placeShip([4, 6], [4, 7], [4, 8], [4, 9]);
-  player1Board.placeShip([7, 3]);
-  player1Board.placeShip([7, 9], [8, 9], [9, 9]);
+
   gameBoardDisplay(player1Board, "player");
+  shipDomPlacement(player1Board);
 
   const cpu1 = player("cpu");
   const cpu1Board = gameBoard();
-  // cpu1Board.placeShip([0, 0], [1, 0], [2, 0], [3, 0], [4, 0]);
-  // cpu1Board.placeShip([0, 8], [0, 9]);
-  // cpu1Board.placeShip([4, 6], [4, 7], [4, 8], [4, 9]);
-  // cpu1Board.placeShip([7, 3]);
-  cpu1Board.placeShip([7, 9], [8, 9], [9, 9]);
+
+  // WIP, pre made CPU ships for now
+  cpu1Board.placeShip([
+    [0, 0],
+    [1, 0],
+    [2, 0],
+    [3, 0],
+    [4, 0],
+  ]);
+  cpu1Board.placeShip([
+    [0, 8],
+    [0, 9],
+  ]);
+  cpu1Board.placeShip([
+    [4, 6],
+    [4, 7],
+    [4, 8],
+    [4, 9],
+  ]);
+  cpu1Board.placeShip([[7, 3]]);
+  cpu1Board.placeShip([
+    [7, 9],
+    [8, 9],
+    [9, 9],
+  ]);
   gameBoardDisplay(cpu1Board, "cpu");
 
   const enemyBoardContainer = document.getElementById("cpu");
